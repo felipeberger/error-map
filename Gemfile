@@ -57,6 +57,10 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Language server powering editor diagnostics, formatting, and lint-on-save
+  # (auto-detects rubocop-rails-omakase already in the bundle) [https://github.com/Shopify/ruby-lsp]
+  gem "ruby-lsp", require: false
 end
 
 group :test do
