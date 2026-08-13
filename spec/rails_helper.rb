@@ -13,7 +13,7 @@ require "capybara/rspec"
 
 RSpec.configure do |config|
   # Use fixtures from the standard Rails fixture directory.
-  config.fixture_paths = [Rails.root.join("test/fixtures")]
+  config.fixture_paths = [ Rails.root.join("test/fixtures") ]
 
   # Automatically mix in different behaviours to your tests based on their file
   # location — e.g., :type => :controller inferred from spec/controllers/
