@@ -9,7 +9,7 @@ class CreateRoutes < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :routes, [:path, :http_method, :service, :environment],
+    add_index :routes, [ :path, :http_method, :service, :environment ],
       unique: true, name: "index_routes_on_identity"
   end
 end

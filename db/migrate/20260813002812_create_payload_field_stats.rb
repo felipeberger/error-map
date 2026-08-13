@@ -11,7 +11,7 @@ class CreatePayloadFieldStats < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :payload_field_stats, [:route_id, :field_path, :anomaly_type],
+    add_index :payload_field_stats, [ :route_id, :field_path, :anomaly_type ],
       unique: true, name: "index_field_stats_on_route_field_anomaly"
   end
 end
