@@ -1,0 +1,15 @@
+{
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.rubocop": "explicit"
+    }
+  },
+  "rubyLsp.formatter": "auto",
+  "rubyLsp.rubyVersionManager": {
+    "identifier": "rbenv"
+  }
+}
