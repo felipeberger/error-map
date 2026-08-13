@@ -343,8 +343,9 @@ GEM
       prism (>= 1.2, < 2.0)
       rbs (>= 3, < 5)
     ruby-progressbar (1.13.0)
-    ruby-vips (2.1.4)
+    ruby-vips (2.2.5)
       ffi (~> 1.12)
+      logger
     rubyzip (3.4.1)
     securerandom (0.4.1)
     selenium-webdriver (4.44.0)
@@ -439,7 +440,7 @@ DEPENDENCIES
   rspec-rails
   rubocop-rails-omakase
   ruby-lsp
-  ruby-vips (~> 2.1.0)
+  ruby-vips (~> 2.2.1)
   selenium-webdriver
   solid_cable
   solid_cache
@@ -581,7 +582,7 @@ CHECKSUMS
   rubocop-rails-omakase (1.1.0) sha256=2af73ac8ee5852de2919abbd2618af9c15c19b512c4cfc1f9a5d3b6ef009109d
   ruby-lsp (0.26.10) sha256=e67284af94423531f6b9a583350596421b5a6a4dd93083f1c2ba03da7c23bbed
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
-  ruby-vips (2.1.4) sha256=ef3c08c11c18141ff1efc09f780b96da9c357cb2f98832f1d029670348bfffa6
+  ruby-vips (2.2.5) sha256=f3c547a172c36ba26b8614c809f5823bc6199623ec6204ec7c3bce29037f7758
   rubyzip (3.4.1) sha256=0a79e745b5c25872ebd148457df5665da8530ed8626c993b01457128f173ca02
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   selenium-webdriver (4.44.0) sha256=6f1df072529af369589c46f0e01132952aabb250cfd683c274d74dc1eb5d8477
