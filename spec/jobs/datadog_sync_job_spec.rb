@@ -39,7 +39,7 @@ RSpec.describe DatadogSyncJob, type: :job do
 
       let(:response) do
         {
-          "data" => [valid_event],
+          "data" => [ valid_event ],
           "meta" => { "page" => { "after" => nil } }
         }
       end
@@ -148,7 +148,7 @@ RSpec.describe DatadogSyncJob, type: :job do
     context "with events missing required fields" do
       it "raises DatadogDataError::UnparsableEventError for missing event id" do
         response = {
-          "data" => [{ "id" => nil, "attributes" => {} }],
+          "data" => [ { "id" => nil, "attributes" => {} } ],
           "meta" => { "page" => { "after" => nil } }
         }
         allow(client).to receive(:fetch_error_logs).and_return(response)
@@ -228,7 +228,7 @@ RSpec.describe DatadogSyncJob, type: :job do
 
       let(:response) do
         {
-          "data" => [event_without_body],
+          "data" => [ event_without_body ],
           "meta" => { "page" => { "after" => nil } }
         }
       end
@@ -260,7 +260,7 @@ RSpec.describe DatadogSyncJob, type: :job do
 
       let(:response) do
         {
-          "data" => [valid_event],
+          "data" => [ valid_event ],
           "meta" => { "page" => { "after" => nil } }
         }
       end
@@ -303,7 +303,7 @@ RSpec.describe DatadogSyncJob, type: :job do
 
       let(:response) do
         {
-          "data" => [duplicate_event],
+          "data" => [ duplicate_event ],
           "meta" => { "page" => { "after" => nil } }
         }
       end
