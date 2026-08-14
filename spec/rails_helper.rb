@@ -27,4 +27,7 @@ RSpec.configure do |config|
 
   # Wrap each example in a database transaction that is rolled back afterwards.
   config.use_transactional_fixtures = true
+
+  # Make FactoryBot methods available in all specs without the FactoryBot:: prefix.
+  config.include FactoryBot::Syntax::Methods
 end

@@ -1,15 +1,11 @@
 require "rails_helper"
 
 RSpec.describe PayloadFieldAnalyzer do
-  let(:route) { Route.create!(path: "/users/:id", http_method: "POST") }
+  let(:route) { create(:route) }
 
   def create_error_payload(body)
-    event = ErrorEvent.create!(
-      route: route,
-      datadog_event_id: SecureRandom.uuid,
-      occurred_at: Time.current
-    )
-    Payload.create!(error_event: event, body: body)
+    event = create(:error_event, route: route)
+    create(:payload, error_event: event, body: body)
   end
 
   it "records null_value anomalies with the rate among error payloads" do
