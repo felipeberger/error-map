@@ -15,12 +15,20 @@ class DatadogSyncJob < ApplicationJob
       cursor = page.dig("meta", "page", "after")
       break if cursor.blank?
     end
+
+    PayloadAnalysisJob.perform_later
   end
 
   private
 
   def ingest_batch(events)
-    Array(events).each { |event| ingest_event(event) }
+    Array(events).each do |event|
+      ingest_event(event)
+    rescue StandardError => e
+      Rails.logger.error(
+        "[DatadogSyncJob] Failed to ingest event #{event["id"].inspect}: #{e.class} #{e.message}"
+      )
+    end
   end
 
   def ingest_event(event)
@@ -55,6 +63,7 @@ class DatadogSyncJob < ApplicationJob
     Payload.find_or_create_by!(error_event: error_event) do |payload|
       payload.content_type = http.dig("request", "headers", "content-type")
       payload.body = body
+      payload.param_fingerprint = ParamFingerprint.compute(body)
     end
   end
 end
