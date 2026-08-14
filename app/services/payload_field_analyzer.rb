@@ -40,15 +40,15 @@ class PayloadFieldAnalyzer
       .order(occurred_at: :desc)
       .limit(MAX_PAYLOADS)
       .includes(:payload)
-      .map { |event| flatten(event.payload.body) }
+      .map { |event| extract_fields(event.payload.body) }
   end
 
-  def flatten(node, prefix = nil, out = {})
+  def extract_fields(node, prefix = nil, out = {})
     case node
     when Hash
-      node.each { |key, value| flatten(value, prefix ? "#{prefix}.#{key}" : key.to_s, out) }
+      node.each { |key, value| extract_fields(value, prefix ? "#{prefix}.#{key}" : key.to_s, out) }
     when Array
-      node.each { |value| flatten(value, "#{prefix}[]", out) }
+      node.each { |value| extract_fields(value, "#{prefix}[]", out) }
     else
       out[prefix] = json_type(node) if prefix
     end
