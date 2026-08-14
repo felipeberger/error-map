@@ -37,10 +37,6 @@ gem "kamal", require: false
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 2.0"
-gem "ruby-vips", "~> 2.3.0", require: false
-
 # HTTP client for calling the Datadog API [https://github.com/lostisland/faraday]
 gem "faraday"
 
@@ -72,4 +68,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "rspec-rails"
+  gem "factory_bot_rails"
 end
