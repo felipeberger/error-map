@@ -1,10 +1,15 @@
 # Polls the Datadog Logs Search API for recent error events and ingests
 # them into routes/error_events/payloads. Scheduled via config/recurring.yml
 # to run on Solid Queue every 5 minutes.
+#
+# The sync window is controlled by the SYNC_WINDOW_MINUTES env var (default 10)
+# and shared with PayloadAnalysisJob so both jobs stay in sync.
 class DatadogSyncJob < ApplicationJob
   queue_as :sync_datadog
 
-  def perform(from: 10.minutes.ago, to: Time.current)
+  class IngestEventError < StandardError; end
+
+  def perform(from: SYNC_WINDOW_MINUTES.ago, to: Time.current)
     client = DatadogClient.new
     cursor = nil
 
@@ -24,9 +29,9 @@ class DatadogSyncJob < ApplicationJob
   def ingest_batch(events)
     Array(events).each do |event|
       ingest_event(event)
-    rescue StandardError => e
+    rescue IngestEventError => e
       Rails.logger.error(
-        "[DatadogSyncJob] Failed to ingest event #{event["id"].inspect}: #{e.class} #{e.message}"
+        "[DatadogSyncJob] Failed to ingest event #{event["id"].inspect}: #{e.cause.class} #{e.message}"
       )
     end
   end
@@ -44,6 +49,8 @@ class DatadogSyncJob < ApplicationJob
 
     error_event = find_or_create_error_event(event, attrs, http, route)
     attach_payload(error_event, http)
+  rescue StandardError => e
+    raise IngestEventError, e.message
   end
 
   def find_or_create_error_event(event, attrs, http, route)
